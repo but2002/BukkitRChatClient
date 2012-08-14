@@ -25,9 +25,15 @@ public class RChatClient extends JFrame {
 		sendBox.setBounds(5, 340, 385, 25);
 		this.add(sendBox);
 
+<<<<<<< HEAD
 		setTitle("BukkitRChatClient");
 		this.setResizable(false);
 		setVisible(true);
+=======
+		this.setTitle("BukkitRChatClient");
+		this.setResizable(false);
+		this.setVisible(true);
+>>>>>>> RChatClient.java
 
 	}
 
