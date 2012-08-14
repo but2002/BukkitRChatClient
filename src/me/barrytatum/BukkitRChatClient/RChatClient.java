@@ -1,6 +1,7 @@
 package me.barrytatum.BukkitRChatClient;
 
 import java.awt.*;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -28,6 +29,14 @@ public class RChatClient extends JFrame {
 		this.setTitle("BukkitRChatClient");
 		this.setResizable(false);
 		this.setVisible(true);
+		
+		try {
+			ChatClient chatClient = new ChatClient("localhost", 5956);
+			chatClient.sendChat("Barry", "This is my Message");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
