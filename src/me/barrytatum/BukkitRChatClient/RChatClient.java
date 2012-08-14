@@ -11,19 +11,19 @@ public class RChatClient extends JFrame {
 	TextField sendBox = new TextField();
 
 	public RChatClient() {
-		setSize(400, 400);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLayout(null);
+		this.setSize(400, 400);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLayout(null);
 
 		chatBox.setVisible(true);
 		chatBox.setBounds(5, 5, 385, 330);
 		chatBox.setEditable(false);
 		chatBox.setEnabled(true);
-		add(chatBox);
+		this.add(chatBox);
 
 		sendBox.setVisible(true);
 		sendBox.setBounds(5, 340, 385, 25);
-		add(sendBox);
+		this.add(sendBox);
 
 		setTitle("BukkitRChatClient");
 		this.setResizable(false);
