@@ -12,6 +12,8 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.net.Socket;
 
+import biz.source_code.base64Coder.Base64Coder;
+
 public class InputStream implements Runnable {
 
 	private BufferedReader in;
@@ -35,15 +37,22 @@ public class InputStream implements Runnable {
 
 	public void run() {
 
-		String message;
+		String encodedString;
 
-		// Always listen for messages.
-		
 		while (true) {
+			
 			try {
-				while ((message = this.in.readLine()) != null) {
-					RChatClient.chatBox.append(String.format("%s\n", message));
-					System.out.println(message);
+				if ((encodedString = this.in.readLine()) != null) {
+					
+					System.out.println(encodedString);
+					
+					String name, message;
+					String[] container = encodedString.split(",");
+					
+					name = Base64Coder.decodeString(container[0]);
+					message = Base64Coder.decodeString(container[1]);
+
+					RChatClient.chatBox.append(String.format("%s: %s\n", name, message));
 				}
 				
 			} catch (IOException e) {

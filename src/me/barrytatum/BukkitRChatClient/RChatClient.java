@@ -35,7 +35,6 @@ public class RChatClient extends JFrame {
 
 		try {
 			chatClient = new ChatHandler("localhost", 5956);
-			chatClient.sendChat("Barry", "This is my Message");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

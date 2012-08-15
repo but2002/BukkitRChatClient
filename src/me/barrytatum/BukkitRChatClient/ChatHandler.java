@@ -41,6 +41,13 @@ public class ChatHandler {
 		inputStreamListener.start();
 
 	}
+	
+	/**
+	 * Sends an encoded message to the server.
+	 * 
+	 * @param name
+	 * @param message
+	 */
 
 	public void sendChat(String name, String message) {
 
@@ -49,6 +56,5 @@ public class ChatHandler {
 				Base64Coder.encodeString(message));
 
 		this.out.println(encodedMessage);
-
 	}
 }
