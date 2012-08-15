@@ -21,7 +21,7 @@ public class InputStream implements Runnable {
 		for (;;) {
 			try {
 				while ((message = this.in.readLine()) != null) {
-					// TODO: Handle messages.
+					RChatClient.chatBox.append(message + "\n");
 					System.out.println(message);
 				}
 			} catch (IOException e) {

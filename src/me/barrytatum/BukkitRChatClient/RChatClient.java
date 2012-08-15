@@ -1,6 +1,8 @@
 package me.barrytatum.BukkitRChatClient;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.IOException;
 
 import javax.swing.*;
@@ -8,7 +10,8 @@ import javax.swing.*;
 public class RChatClient extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	TextArea chatBox = new TextArea("", 0, 0, 1);
+	ChatHandler chatClient;
+	public static TextArea chatBox = new TextArea("", 0, 0, 1);
 	TextField sendBox = new TextField();
 
 	public RChatClient() {
@@ -29,14 +32,39 @@ public class RChatClient extends JFrame {
 		this.setTitle("BukkitRChatClient");
 		this.setResizable(false);
 		this.setVisible(true);
-		
+
 		try {
-			ChatHandler chatClient = new ChatHandler("localhost", 5956);
+			chatClient = new ChatHandler("localhost", 5956);
 			chatClient.sendChat("Barry", "This is my Message");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		KeyListener eListen = new KeyListener() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+					chatClient.sendChat("TEST", sendBox.getText());
+					chatBox.append("TEST: " + sendBox.getText() + "\n");
+					sendBox.setText(null);
+				}
+
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		};
+		sendBox.addKeyListener(eListen);
 
 	}
 
