@@ -13,14 +13,15 @@ public class DataStream implements Runnable {
 	DataStream(Socket connection) throws IOException {
 		
 		this.connection = connection;
-		this.out = new PrintWriter(this.connection.getOutputStream());
+		this.out = new PrintWriter(this.connection.getOutputStream(), true);
+		this.run();
 	}
 
 	public void run() {
 		
 		for (;;) {
 			while (this.message != null) {
-				this.out.println(message);
+				this.out.println(this.message);
 				this.message = null;
 			}
 		}
