@@ -44,8 +44,6 @@ public class InputStream implements Runnable {
 			try {
 				if ((encodedString = this.in.readLine()) != null) {
 					
-					System.out.println(encodedString);
-					
 					String name, message;
 					String[] container = encodedString.split(",");
 					
