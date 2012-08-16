@@ -3,7 +3,7 @@ package me.barrytatum.BukkitRChatClient;
 /**
  * File:		ChatServer.java
  * Created:		8/12/2012
- * Modified:	8/15/2012
+ * Modified:	8/16/2012
  * Author:		Blake Renton
  */
 
@@ -39,23 +39,23 @@ public class InputStream implements Runnable {
 		String encodedString;
 
 		while (true) {
-			
+
 			try {
-				
+
 				if ((encodedString = this.in.readLine()) != null) {
-					
+
 					String name, message;
 					String[] container = encodedString.split(",");
-					
+
 					name = Base64Coder.decodeString(container[0]);
 					message = Base64Coder.decodeString(container[1]);
 
-					RChatClient.chatBox.append(String.format("%s: %s\n", name, message));
+					ChatWindow.sendMessage(String
+							.format("%s:%s", name, message));
 				}
-				
+
 			} catch (IOException e) {
-				RChatClient.chatBox
-						.append("[Notice] Connection to server interrupted.\n");
+				ChatWindow.logError("Disconnected from server.");
 				return;
 			}
 

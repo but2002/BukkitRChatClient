@@ -1,75 +1,54 @@
 package me.barrytatum.BukkitRChatClient;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.IOException;
 
-import javax.swing.*;
+/**
+ * File: RChatClient.java
+ * Created: 8/12/2012
+ * Modified: 8/16/2012 
+ * Author: Barry Tatum, Blake Renton
+ */
 
-public class RChatClient extends JFrame {
+public class RChatClient {
 
-	private static final long serialVersionUID = 1L;
-	ChatHandler chatClient;
-	public static TextArea chatBox = new TextArea("", 0, 0, 1);
-	TextField sendBox = new TextField();
+	public static ChatHandler chInstance;
 
-	public RChatClient() {
-		this.setSize(400, 400);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setLayout(null);
-
-		chatBox.setVisible(true);
-		chatBox.setBounds(5, 5, 385, 330);
-		chatBox.setEditable(false);
-		chatBox.setEnabled(true);
-		this.add(chatBox);
-
-		sendBox.setVisible(true);
-		sendBox.setBounds(5, 340, 385, 25);
-		this.add(sendBox);
-
-		this.setTitle("BukkitRChatClient");
-		this.setResizable(false);
-		this.setVisible(true);
-
-		try {
-			chatClient = new ChatHandler("localhost", 5956);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		KeyListener eListen = new KeyListener() {
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
-					chatClient.sendChat("TEST", sendBox.getText());
-					chatBox.append("TEST: " + sendBox.getText() + "\n");
-					sendBox.setText(null);
-				}
-
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		};
-		sendBox.addKeyListener(eListen);
-
-	}
+	/**
+	 * Constructor for RChatClient. Instantiates the user interface and
+	 * establishes the network connections.
+	 */
 
 	public static void main(String[] args) {
-		new RChatClient();
 
+		new ChatWindow();
+
+		String host = "localhost";
+		int port = 5956;
+
+		ChatWindow.sendMessage(String.format("Connecting to %s:%d...", host,
+				port));
+
+		do {
+
+			try {
+				chInstance = new ChatHandler(host, port);
+
+			} catch (IOException e) {
+				ChatWindow
+						.logError("Unable to connect.  Attempting to retry in 10 seconds.");
+
+				try {
+					Thread.sleep(10000);
+				} catch (InterruptedException e1) {
+					return;
+				}
+
+			} // end try()
+
+		} // end do()
+
+		while (chInstance == null);
+
+		ChatWindow.sendMessage("Connected.\n");
 	}
-
 }
