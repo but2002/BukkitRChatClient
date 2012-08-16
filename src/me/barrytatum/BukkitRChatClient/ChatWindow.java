@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class ChatWindow extends JFrame {
 
@@ -29,6 +30,20 @@ public class ChatWindow extends JFrame {
 	 */
 
 	ChatWindow() {
+		
+		RChatClient.host = JOptionPane.showInputDialog("Enter the host");
+		
+		while ( true ) {
+			try {
+				RChatClient.port = Integer.parseInt(JOptionPane.showInputDialog("Enter the port"));
+				break;
+			}
+			
+			catch ( NumberFormatException e ) {
+				JOptionPane.showMessageDialog(null, "Please enter a valid port", "Error", JOptionPane.ERROR_MESSAGE);
+			}
+			
+		} // end while()
 
 		ChatWindow.input = new TextField();
 		ChatWindow.history = new TextArea(null, 0, 0, 1);

@@ -12,6 +12,8 @@ import java.io.IOException;
 public class RChatClient {
 
 	public static ChatHandler chInstance;
+	public static String host;
+	public static int port;
 
 	/**
 	 * Constructor for RChatClient. Instantiates the user interface and
@@ -22,16 +24,13 @@ public class RChatClient {
 
 		new ChatWindow();
 
-		String host = "localhost";
-		int port = 5956;
-
 		ChatWindow.sendMessage(String.format("Connecting to %s:%d...", host,
 				port));
 
 		do {
 
 			try {
-				chInstance = new ChatHandler(host, port);
+				chInstance = new ChatHandler(RChatClient.host, RChatClient.port);
 
 			} catch (IOException e) {
 				ChatWindow
