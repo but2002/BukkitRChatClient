@@ -1,16 +1,15 @@
 package me.barrytatum.BukkitRChatClient;
 
 /**
- * The chat connection handler for the Bukkit Remote Chat plugin.
- * 
- * Authors: Blake Renton
- * Website: http://www.blakerenton.net
+ * File:		ChatServer.java
+ * Created:		8/12/2012
+ * Modified:	8/15/2012
+ * Author:		Blake Renton
  */
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
-
 import biz.source_code.base64Coder.Base64Coder;
 
 public class ChatHandler {
@@ -43,7 +42,7 @@ public class ChatHandler {
 	}
 	
 	/**
-	 * Sends an encoded message to the server.
+	 * Sends a base-64 encoded message to the server.
 	 * 
 	 * @param name
 	 * @param message

@@ -1,17 +1,16 @@
 package me.barrytatum.BukkitRChatClient;
 
 /**
- * The data listener for the Bukkit Remote Chat plugin.
- * 
- * Authors: Blake Renton, Barry Tatum
- * Website: http://www.blakerenton.net
+ * File:		ChatServer.java
+ * Created:		8/12/2012
+ * Modified:	8/15/2012
+ * Author:		Blake Renton
  */
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.net.Socket;
-
 import biz.source_code.base64Coder.Base64Coder;
 
 public class InputStream implements Runnable {
@@ -42,6 +41,7 @@ public class InputStream implements Runnable {
 		while (true) {
 			
 			try {
+				
 				if ((encodedString = this.in.readLine()) != null) {
 					
 					String name, message;
